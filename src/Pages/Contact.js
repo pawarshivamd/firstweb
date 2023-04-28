@@ -1,27 +1,34 @@
 
 import React, { useState } from "react";
-const Contact = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Name: ", name);
-    console.log("Email: ", email);
-    console.log("Message: ", message);
-    // Add your code to send the data to the server or an email service here
+const Contact = () => {
+  // const [name, setName] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [message, setMessage] = useState("");
+
+  // const  handleChange = (e) => {
+  //   e.preventDefault();
+  //   console.log("Name: ", name);
+  //   console.log("Email: ", email);
+  //   console.log("Message: ", message);
+  //   // Add your code to send the data to the server or an email service here
+  // };
+  const [user,setUser]= useState({name:'',email:'',number:''});
+  const  handleChange =(key,value)=>{
+    setUser((oldStateValue) => {
+      return{ ...oldStateValue,[key]:value};
+    });
   };
   return (
     <div className="container">
       <h1>Contact Us</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={ handleChange}>
         <label>
           Name:
           <input
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={user.name}
+            onChange={(e) => { handleChange('name',e.target.value);}}
           />
         </label>
         <br />
@@ -29,20 +36,20 @@ const Contact = () => {
           Email:
           <input
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={user.email}
+            onChange={(e) => { handleChange('email',e.target.value);}}
           />
         </label>
         <br />
         <label>
           Message:
           <textarea
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
+            value={user.message}
+            onChange={(e) => { handleChange('message',e.target.value);}}
           />
         </label>
         <br />
-        <button type="submit">Submit</button>
+        <button type="submit" className="btn">Submit</button>
       </form>
     </div>
   )
